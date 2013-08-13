@@ -203,14 +203,20 @@ var editor = (function() {
 	}
 
 	function onBoldClick() {
+
+		document.dispatchEvent( new Event( 'bold' ));
 		document.execCommand( 'bold', false );
 	}
 
 	function onItalicClick() {
+
+		document.dispatchEvent( new Event( 'italic' ));
 		document.execCommand( 'italic', false );
 	}
 
 	function onQuoteClick() {
+
+		document.dispatchEvent( new Event( 'blockquote' ));
 
 		var nodeNames = findNodes( window.getSelection().focusNode );
 
@@ -222,6 +228,8 @@ var editor = (function() {
 	}
 
 	function onUrlClick() {
+
+		document.dispatchEvent( new Event( 'url' ));
 
 		if ( optionsBox.className == 'options' ) {
 
