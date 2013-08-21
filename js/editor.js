@@ -1,7 +1,7 @@
 var editor = (function() {
 
 	// Editor elements
-	var headerField, contentField, cleanSlate, lastType, currentNodeList, savedSelection;
+	var headerField, contentField, notesField, cleanSlate, lastType, currentNodeList, savedSelection;
 
 	// Editor Bubble elements
 	var textOptions, optionsBox, boldButton, italicButton, quoteButton, urlButton, urlInput;
@@ -55,6 +55,7 @@ var editor = (function() {
 
 		headerField = document.querySelector( '.header' );
 		contentField = document.querySelector( '.content' );
+		notesField = document.querySelector( '.notes' );
 		textOptions = document.querySelector( '.text-options' );
 
 		optionsBox = textOptions.querySelector( '.options' );
@@ -189,6 +190,7 @@ var editor = (function() {
 		
 		localStorage[ 'header' ] = headerField.innerHTML;
 		localStorage[ 'content' ] = contentField.innerHTML;
+		localStorage[ 'notes' ] = notesField.innerHTML;
 	}
 
 	function loadState() {
@@ -199,6 +201,10 @@ var editor = (function() {
 
 		if ( localStorage[ 'content' ] ) {
 			contentField.innerHTML = localStorage[ 'content' ];
+		}
+
+		if ( localStorage[ 'notes' ] ) {
+			notesField.innerHTML = localStorage[ 'notes' ];
 		}
 	}
 

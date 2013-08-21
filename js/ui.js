@@ -1,16 +1,19 @@
 var ui = (function() {
 
 	// Base elements
-	var body, article, uiContainer, overlay, descriptionModal;
+	var body, article, articleContainer, notesContainer, uiContainer, overlay, descriptionModal;
 
 	// Buttons
-	var screenSizeElement, colorLayoutElement, targetElement;
+	var screenSizeElement, colorLayoutElement, targetElement, notesToggleElement;
 
 	// Work Counter
 	var wordCountValue, wordCountBox, wordCountElement, wordCounter, wordCounterProgress;
 
 	var expandScreenIcon = '&#xe006;';
 	var shrinkScreenIcon = '&#xe005;';
+
+	var hideNotesIcon = '&#xe066;';
+	var showNotesIcon = '&#xe044;';
 
 	var darkLayout = false;
 
@@ -70,6 +73,10 @@ var ui = (function() {
 		screenSizeElement = document.querySelector( '.fullscreen' );
 		screenSizeElement.onclick = onScreenSizeClick;
 
+		// UI element for notes
+		notesToggleElement = document.querySelector( '.notes-toggle' );
+		notesToggleElement.onclick = onNotesToggleClick;
+
 		targetElement = document.querySelector( '.target ');
 		targetElement.onclick = onTargetClick;
 
@@ -85,6 +92,9 @@ var ui = (function() {
 
 		article = document.querySelector( '.content' );
 		article.onkeyup = onArticleKeyUp;
+
+		articleContainer = document.querySelector( '.article-container' );
+		notesContainer = document.querySelector( '.notes-container' );
 
 		wordCountBox = overlay.querySelector( '.wordcount' );
 		wordCountElement = wordCountBox.querySelector( 'input' );
@@ -117,6 +127,19 @@ var ui = (function() {
 	function exitFullscreen() {
 		document.exitFullscreen();
 		screenSizeElement.innerHTML = expandScreenIcon;	
+	}
+
+	function onNotesToggleClick( event ) {
+
+		if ( notesContainer.style.display === 'none' ) {
+			notesContainer.style.display = 'block';
+			articleContainer.style.display = 'none';
+			notesToggleElement.innerHTML = hideNotesIcon;	
+		} else {
+			notesContainer.style.display = 'none';
+			articleContainer.style.display = 'block';
+			notesToggleElement.innerHTML = showNotesIcon;	
+		}
 	}
 
 	function onColorLayoutClick( event ) {
