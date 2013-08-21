@@ -1,7 +1,7 @@
 var ui = (function() {
 
 	// Base elements
-	var body, article, uiContainer, overlay, aboutButton, descriptionModal;
+	var body, article, uiContainer, overlay, descriptionModal;
 
 	// Buttons
 	var screenSizeElement, colorLayoutElement, targetElement;
@@ -23,8 +23,6 @@ var ui = (function() {
 		if ( supportsHtmlStorage() ) {
 			loadState();
 		}
-
-		console.log( "Checkin under the hood eh? We've probably got a lot in common. You should totally check out ZenPen on github! (https://github.com/tholman/zenpen)." );
 	}
 
 	function loadState() {
@@ -97,9 +95,6 @@ var ui = (function() {
 
 		wordCounter = document.querySelector( '.word-counter' );
 		wordCounterProgress = wordCounter.querySelector( '.progress' );
-
-		aboutButton = document.querySelector( '.about' );
-		aboutButton.onclick = onAboutButtonClick;
 
 		header = document.querySelector( '.header' );
 		header.onkeypress = onHeaderKeyPress;
