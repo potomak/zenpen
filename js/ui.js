@@ -132,10 +132,12 @@ var ui = (function() {
 	function onNotesToggleClick( event ) {
 
 		if ( notesContainer.style.display === 'none' ) {
+			document.dispatchEvent( new Event( 'notes' ));
 			notesContainer.style.display = 'block';
 			articleContainer.style.display = 'none';
 			notesToggleElement.innerHTML = hideNotesIcon;	
 		} else {
+			document.dispatchEvent( new Event( 'text' ));
 			notesContainer.style.display = 'none';
 			articleContainer.style.display = 'block';
 			notesToggleElement.innerHTML = showNotesIcon;	
