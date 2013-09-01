@@ -77,9 +77,6 @@ var ui = (function() {
 		notesToggleElement = document.querySelector( '.notes-toggle' );
 		notesToggleElement.onclick = onNotesToggleClick;
 
-		targetElement = document.querySelector( '.target ');
-		targetElement.onclick = onTargetClick;
-
 		document.addEventListener( "fullscreenchange", function () {
 			if ( document.fullscreenEnabled === false ) {
 				exitFullscreen();

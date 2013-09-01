@@ -6,9 +6,12 @@ var editor = (function() {
 	// Editor Bubble elements
 	var textOptions, optionsBox, boldButton, italicButton, quoteButton, urlButton, urlInput;
 
+	var storageId;
 
-	function init() {
 
+	function init(id) {
+
+		storageId = id;
 		lastRange = 0;
 		bindElements();
 
@@ -68,13 +71,6 @@ var editor = (function() {
 
 		quoteButton = textOptions.querySelector( '.quote' );
 		quoteButton.onclick = onQuoteClick;
-
-		urlButton = textOptions.querySelector( '.url' );
-		urlButton.onmousedown = onUrlClick;
-
-		urlInput = textOptions.querySelector( '.url-input' );
-		urlInput.onblur = onUrlInputBlur;
-		urlInput.onkeydown = onUrlInputKeyDown;
 	}
 
 	function checkTextHighlighting( event ) {
@@ -137,16 +133,10 @@ var editor = (function() {
 			italicButton.className = "italic"
 		}
 
-		if ( hasNode( currentNodeList, 'BLOCKQUOTE') ) {
+		if ( hasNode( currentNodeList, 'H2') ) {
 			quoteButton.className = "quote active"
 		} else {
 			quoteButton.className = "quote"
-		}
-
-		if ( hasNode( currentNodeList, 'A') ) {
-			urlButton.className = "url useicons active"
-		} else {
-			urlButton.className = "url useicons"
 		}
 	}
 
@@ -188,23 +178,23 @@ var editor = (function() {
 
 	function saveState( event ) {
 		
-		localStorage[ 'header' ] = headerField.innerHTML;
-		localStorage[ 'content' ] = contentField.innerHTML;
-		localStorage[ 'notes' ] = notesField.innerHTML;
+		localStorage[ 'header:' + storageId ] = headerField.innerHTML;
+		localStorage[ 'content:' + storageId ] = contentField.innerHTML;
+		localStorage[ 'notes:' + storageId ] = notesField.innerHTML;
 	}
 
 	function loadState() {
 
-		if ( localStorage[ 'header' ] ) {
-			headerField.innerHTML = localStorage[ 'header' ];
+		if ( localStorage[ 'header:' + storageId ] ) {
+			headerField.innerHTML = localStorage[ 'header:' + storageId ];
 		}
 
-		if ( localStorage[ 'content' ] ) {
-			contentField.innerHTML = localStorage[ 'content' ];
+		if ( localStorage[ 'content:' + storageId ] ) {
+			contentField.innerHTML = localStorage[ 'content:' + storageId ];
 		}
 
-		if ( localStorage[ 'notes' ] ) {
-			notesField.innerHTML = localStorage[ 'notes' ];
+		if ( localStorage[ 'notes:' + storageId ] ) {
+			notesField.innerHTML = localStorage[ 'notes:' + storageId ];
 		}
 	}
 
@@ -222,14 +212,14 @@ var editor = (function() {
 
 	function onQuoteClick() {
 
-		document.dispatchEvent( new Event( 'blockquote' ));
+		document.dispatchEvent( new Event( 'chapter' ));
 
 		var nodeNames = findNodes( window.getSelection().focusNode );
 
-		if ( hasNode( nodeNames, 'BLOCKQUOTE' ) ) {
+		if ( hasNode( nodeNames, 'H2' ) ) {
 			document.execCommand( 'formatBlock', false, 'p' );
 		} else {
-			document.execCommand( 'formatBlock', false, 'blockquote' );
+			document.execCommand( 'formatBlock', false, 'h2' );
 		}
 	}
 
